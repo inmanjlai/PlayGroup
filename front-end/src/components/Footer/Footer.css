@@ -2,6 +2,13 @@ footer {
     grid-area: footer;
     color: #fff;
     background-color: #212121;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 10%;
+}
+
+.container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 2fr 5fr;
@@ -10,7 +17,9 @@ footer {
     "account discover playgroup";
     /* justify-items: center; */
     /* align-items: center; */
-    padding: 0 10%;
+    height: 100%;
+    max-width: 1200px;
+    flex: 1;
 }
 
 .get-started {

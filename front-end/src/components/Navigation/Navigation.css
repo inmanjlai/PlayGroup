@@ -19,6 +19,10 @@ nav a {
     padding-right: 1rem;
 }
 
+nav a:hover {
+    color: rgb(60, 128, 133);
+}
+
 .logo a {
     color: red;
     margin-left: 1rem;
