@@ -1,0 +1,25 @@
+nav {
+    background-color: transparent;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: navbar;
+}
+
+nav > ul {
+    list-style: none;
+    font-weight: bold;
+    font-size: small;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    padding-right: 1rem;
+}
+
+.logo a {
+    color: red;
+    margin-left: 1rem;
+}

@@ -17,29 +17,29 @@ const removeUser = () => ({
 export const signup = (user) => async (dispatch) => {
     const { username, email, password } = user;
     const response = await csrfFetch("/api/users", {
-      method: "POST",
-      body: JSON.stringify({
+        method: "POST",
+        body: JSON.stringify({
         username,
         email,
         password,
-      }),
-    });
-    const data = await response.json();
-    dispatch(setUser(data.user));
-    return response;
-  };
+    }),
+});
+const data = await response.json();
+dispatch(setUser(data.user));
+return response;
+};
 
 export const login = (user) => async(dispatch) => {
     const {credential, password} = user;
-
+    
     const response = await csrfFetch("/api/session",
     {
         method: "POST", 
         body: JSON.stringify({credential, password})
     })
-
+    
     const data = await response.json();
-    dispatch(setUser(data.user))
+    dispatch(setUser(data.user));
     return response;
 }
 
@@ -61,16 +61,17 @@ export const logout = () => async (dispatch) => {
 const loginUserReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
-    case SET_USER:
-        newState = Object.assign({}, state)
-        newState.user = action.payload;
-        return newState;
-    case REMOVE_USER:
-        newState = Object.assign({}, state);
-        newState.user = null;
-    default:
-        return state
- }
+        case SET_USER:
+            newState = Object.assign({}, state)
+            newState.user = action.payload;
+            return newState;
+        case REMOVE_USER:
+            newState = Object.assign({}, state);
+            newState.user = null;
+            return newState;;;;; //that works btw
+        default:
+            return state
+    }
 }
-
+            
 export default loginUserReducer;

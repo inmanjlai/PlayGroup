@@ -1,0 +1,58 @@
+footer {
+    grid-area: footer;
+    color: #fff;
+    background-color: #212121;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 5fr;
+    grid-template-areas: 
+    "getStarted getStarted getStarted"
+    "account discover playgroup";
+    /* justify-items: center; */
+    /* align-items: center; */
+    padding: 0 10%;
+}
+
+.get-started {
+    height: 100%;
+    grid-area:getStarted;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    /* padding-bottom: 1rem; */
+    border-bottom: 1px solid rgba(117, 117, 117, 1);
+}
+
+.get-started h2 {
+    font-size: 1rem;
+}
+
+.get-started button {
+    padding: 8px 12px;
+    background-color: #212121;
+    border: 2px solid white;
+    border-radius: 7px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.get-started button:hover {
+    border: 2px solid rgb(226, 226, 226);
+}
+
+.account-list h3, .discover-list h3, .about-list h3 {
+    font-weight: 200;
+    padding: 1rem 0;
+}
+
+.account-list ul, .discover-list ul, .about-list ul {
+    list-style: none;
+    font-size: small;
+    color: rgba(197, 196, 196, 1);
+}
+
+.account-list ul li, .discover-list ul li, .about-list ul li {
+    padding: 0.5rem 0;
+}
