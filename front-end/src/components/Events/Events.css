@@ -1,0 +1,16 @@
+.event-card {
+    display: inline-flex;
+    /* background-color: #dddddd; */
+    background-color: white;
+    margin: 1rem;
+    padding: 1rem;
+    width: 400px;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgba(117, 117, 117, 1);
+    box-shadow:0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.event-card p {
+    padding: 0.5rem 0;
+}
