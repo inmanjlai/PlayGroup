@@ -68,7 +68,7 @@ const loginUserReducer = (state = initialState, action) => {
         case REMOVE_USER:
             newState = Object.assign({}, state);
             newState.user = null;
-            return newState;;;;; //that works btw
+            return newState;//that works btw
         default:
             return state
     }

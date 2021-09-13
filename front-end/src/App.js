@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Events from "./components/Events";
 import CreateEventForm from "./components/CreateEventForm";
+import EditFormPage from "./components/Events/EditEventPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,11 +28,14 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/events">
+          <Route exact path="/events">
             <Events />
           </Route>
-          <Route path="/new-event/">
+          <Route exact path="/events/new">
             <CreateEventForm />
+          </Route>
+          <Route exact path="/events/:eventId/edit">
+            <EditFormPage />
           </Route>
         </Switch>
       )}

@@ -23,7 +23,7 @@ function Navigation({ isLoaded }){
 
   return (
     <nav>
-        <h2 className="logo"><NavLink exact to="/">PlayGroup</NavLink></h2>
+        <h2 className="logo"><NavLink exact to="/events">PlayGroup</NavLink></h2>
         <ul>
         <li>
             {isLoaded && sessionLinks}

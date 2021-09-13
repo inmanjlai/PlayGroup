@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router';
 import { getEntireDatabase } from '../../store/db';
 import { createOneEvent } from '../../store/events';
 const { useState, useEffect } = require("react")
@@ -13,11 +14,12 @@ const CreateEventForm = () => {
 
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getEntireDatabase())
         setHostId(user.id)
-    },[])
+    },[dispatch])
         
 
     const allGames = [];
@@ -39,9 +41,8 @@ const CreateEventForm = () => {
         const form = {
             name, format, date, locationId, hostId
         }
-        console.log(form)
-        // instead of console logging this form send it as a fetch request to an api endpoint to create an event
         dispatch(createOneEvent(form))
+        history.push('/events')
     }
 
     return (
@@ -67,7 +68,7 @@ const CreateEventForm = () => {
                     onChange={(e) => setFormat(e.target.value)}
                     name="format"
                 >
-                    {allGames.map((game) => <option value={game.id}>{game.name}</option> )}
+                    {allGames.map((game) => <option value={game.id} key={game.id}>{game.name}</option> )}
                 </select>
 
                 <label htmlFor="date">Event Date</label>
@@ -83,7 +84,7 @@ const CreateEventForm = () => {
                     onChange={(e) => setLocationId(e.target.value)}
                     name="locationId"
                 >
-                    {allLocations.map((location) => <option value={location.id}>{location.name}</option> )}
+                    {allLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option> )}
                 </select>
 
                 <button type="submit">Submit</button>
