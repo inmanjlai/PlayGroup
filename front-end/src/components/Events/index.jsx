@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getEntireDatabase } from "../../store/db"
 import { NavLink } from 'react-router-dom'
 import './Events.css'
-import { deleteOneEvent } from "../../store/events"
+import { createOneRSVP } from "../../store/events"
 
 const Events = () => {
     const dispatch = useDispatch()
@@ -30,7 +30,11 @@ const Events = () => {
                     <p>Date: {event.date}</p>
                     <p>Location: {event.Location.name}</p>
                     <p>Format: {event.Game.name}</p>
-                    {user && event.User.id === user.id ? <NavLink to={`/events/${event.id}/edit`}>Edit</NavLink> : false}
+                    <p>Attending: {event.RSVPs.length}</p>
+                    <div className="user-controls">
+                        {user && event.User.id !== user.id ? <button onClick={() => dispatch(createOneRSVP({userId: user.id, eventId: event.User.id}))}>Attend</button> : false}
+                        {user && event.User.id === user.id ? <NavLink to={`/events/${event.id}/edit`}>Edit</NavLink> : false}
+                    </div>
                 </div>
             ) )}
 

@@ -46,7 +46,7 @@ const CreateEventForm = () => {
     }
 
     return (
-        <div>
+        <div className="form-container">
             <form onSubmit={handleSubmit}>
 
                 <label htmlFor="name">Event Name</label>

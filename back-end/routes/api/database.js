@@ -1,4 +1,4 @@
-const { Event, User, Location, Game } = require('../../db/models');
+const { Event, User, Location, Game, RSVP } = require('../../db/models');
 const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
@@ -10,11 +10,14 @@ router.get('/', asyncHandler(async(req, res) => {
     const events = await Event.findAll({include: { all:true }})
     const locations = await Location.findAll({include: { all: true }})
     const games = await Game.findAll({include: { all: true}})
+    const rsvps = await RSVP.findAll({include: { all: true }});
 
     db['users'] = users;
     db['events'] = events;
     db['locations'] = locations;
     db['games'] = games;
+    db['rsvp'] = rsvps;
+    
     return res.json(db);
 }))
 

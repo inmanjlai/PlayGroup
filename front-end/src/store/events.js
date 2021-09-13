@@ -5,6 +5,7 @@ export const GET_GAMES = 'games/GET_GAMES'
 export const CREATE_EVENT = 'event/CREATE_EVENT'
 export const EDIT_EVENT = 'event/EDIT_EVENT'
 export const DELETE_EVENT = 'event/DELETE_EVENT'
+export const CREATE_RSVP = 'event/CREATE_RSVP'
 
 const getEvents = (events) => ({
     type: GET_EVENTS,
@@ -24,6 +25,12 @@ const createEvent = (event) => ({
 const deleteEvent = (formData) => ({
     type: DELETE_EVENT,
     formData
+})
+
+const createRSVP = (userId, eventId) => ({
+    type: CREATE_RSVP,
+    userId,
+    eventId
 })
 
 const initialState = {};
@@ -84,10 +91,28 @@ export const deleteOneEvent = (formData) => async(dispatch) => {
     return false;
 }
 
+export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
+    const response = await csrfFetch('/api/rsvp', 
+    {
+        method: "POST",
+        body: JSON.stringify(userId, eventId)
+    })
+    if (response.ok) {
+        const rsvp = await response.json();
+        dispatch(createRSVP(rsvp));
+        return rsvp;
+    }
+    return false;
+}
+
 const eventReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
         case GET_EVENTS:
+            newState = Object.assign({}, state);
+            action.events.forEach((event) => newState[event.id] = event);
+            return newState;
+        case CREATE_RSVP:
             newState = Object.assign({}, state);
             action.events.forEach((event) => newState[event.id] = event);
             return newState;

@@ -77,6 +77,8 @@ nav a:hover {
 }
 
 .logo a {
-    color: red;
-    margin-left: 1rem;
+    color: rgb(190, 41, 91);
+    margin-left: 2rem;
+    font-family: 'DM Serif Display', serif;
+    transition: color 0.5s;
 }

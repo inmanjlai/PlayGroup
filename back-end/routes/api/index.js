@@ -9,6 +9,7 @@ const usersRouter = require('./users.js');
 const eventsRouter = require('./events')
 const gamesRouter = require('./games')
 const dbRouter = require('./database')
+const rsvpRouter = require('./rsvp');
 
 
 router.use('/session', sessionRouter);
@@ -20,6 +21,8 @@ router.use('/events', eventsRouter)
 router.use('/games', gamesRouter)
 
 router.use('/db', dbRouter)
+
+router.use('/rsvp', rsvpRouter)
 
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
 //   const user = await User.findOne({
