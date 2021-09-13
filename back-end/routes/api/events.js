@@ -24,5 +24,37 @@ router.post('/', requireAuth, asyncHandler(async(req, res) => {
     return res.json(event);
 }))
 
+router.put('/', requireAuth, asyncHandler(async(req, res) => {
+
+    const { name, format, date, locationId, hostId, eventId } = req.body;
+
+    const event = await Event.findOne({where: {id: eventId}})
+
+    console.log(event, "<----------------------------------")
+
+    await event.update({
+        name,
+        gameId: format,
+        hostId,
+        date,
+        locationId
+    })
+
+    return res.json(event);
+}))
+
+router.delete('/', requireAuth, asyncHandler(async(req, res) => {
+
+    const { eventId } = req.body;
+
+    const event = await Event.findOne({where: {id: eventId}})
+
+    console.log(event, "<----------------------------------")
+
+    await event.destroy()
+
+    return res.json({message: "event deleted successfully"});
+}))
+
 
 module.exports = router;
