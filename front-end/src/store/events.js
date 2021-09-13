@@ -27,10 +27,9 @@ const deleteEvent = (formData) => ({
     formData
 })
 
-const createRSVP = (userId, eventId) => ({
+const createRSVP = (rsvp) => ({
     type: CREATE_RSVP,
-    userId,
-    eventId
+    rsvp
 })
 
 const initialState = {};
@@ -92,11 +91,13 @@ export const deleteOneEvent = (formData) => async(dispatch) => {
 }
 
 export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
+    console.log("creating request with", userId, eventId)
     const response = await csrfFetch('/api/rsvp', 
     {
         method: "POST",
-        body: JSON.stringify(userId, eventId)
+        body: JSON.stringify({userId: userId, eventId: eventId})
     })
+    console.log("req created", response.ok)
     if (response.ok) {
         const rsvp = await response.json();
         dispatch(createRSVP(rsvp));
@@ -109,10 +110,6 @@ const eventReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
         case GET_EVENTS:
-            newState = Object.assign({}, state);
-            action.events.forEach((event) => newState[event.id] = event);
-            return newState;
-        case CREATE_RSVP:
             newState = Object.assign({}, state);
             action.events.forEach((event) => newState[event.id] = event);
             return newState;

@@ -11,7 +11,6 @@ const EditFormPage = () => {
     const params = useParams();
     
     const { eventId } = params;
-    const events = useSelector((state) => state.db.events)
 
     // const currentEvent = events.find((event) => event.id === eventId)
 

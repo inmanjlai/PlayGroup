@@ -9,11 +9,16 @@ const Events = () => {
     const dispatch = useDispatch()
 
     const events = useSelector((state) => state.db.events);
+    const rsvp = useSelector((state) => state.db.rsvp)
     const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
         dispatch(getEntireDatabase())
-    }, [dispatch])
+    }, [dispatch, rsvp])
+
+    useEffect(() => {
+        console.log("update")
+    }, [events, rsvp])
     
     
     const allEvents = [];
@@ -32,7 +37,7 @@ const Events = () => {
                     <p>Format: {event.Game.name}</p>
                     <p>Attending: {event.RSVPs.length}</p>
                     <div className="user-controls">
-                        {user && event.User.id !== user.id ? <button onClick={() => dispatch(createOneRSVP({userId: user.id, eventId: event.User.id}))}>Attend</button> : false}
+                        {user && event.User.id !== user.id ? <button onClick={() => dispatch(createOneRSVP({userId: user.id, eventId: event.id}))}>Attend</button> : false}
                         {user && event.User.id === user.id ? <NavLink to={`/events/${event.id}/edit`}>Edit</NavLink> : false}
                     </div>
                 </div>

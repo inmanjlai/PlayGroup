@@ -1,40 +1,17 @@
 import { csrfFetch } from "./csrf";
 
-export const GET_DB = 'event/GET_DB'
-//// FOR LATER ->
-// export const GET_USERS = 'event/GET_USERS'
-// export const GET_EVENTS = 'event/GET_EVENTS'
-// export const GET_LOCATIONS = 'event/GET_LOCATIONS'
-// export const GET_GAMES = 'event/GET_GAMES'
-
+export const GET_DB = 'database/GET_DB'
+export const CREATE_RSVP = 'event/CREATE_RSVP'
 
 const getDatabase = (database) => ({
     type: GET_DB,
     database
 })
 
-
-////// FOR LATER ->
-
-// const getUsers = (users) => ({
-//     type: GET_USERS,
-//     users
-// })
-
-// const getEvents = (events) => ({
-//     type: GET_EVENTS,
-//     events
-// })
-
-// const getLocations = (locations) => ({
-//     type: GET_LOCATIONS,
-//     locations
-// })
-
-// const getGames = (games) => ({
-//     type: GET_GAMES,
-//     games
-// })
+const createRSVP = (rsvp) => ({
+    type: CREATE_RSVP,
+    rsvp
+})
 
 const initialState = {};
 
@@ -50,18 +27,19 @@ export const getEntireDatabase = () => async(dispatch) => {
 }
 
 
-//// TRY THIS LATER
-// export const getResource = (resource) => async(dispatch) => {
-
-//     const response = await csrfFetch('/api/db');
-//     if(response.ok){
-//         const data = await response.json();
-//         const specificData = data[resource];
-//         dispatch(`get${resource}(${resource.toLowerCase()})`)
-//         return specificData;
-//     }
-
-// }
+export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
+    const response = await csrfFetch('/api/rsvp', 
+    {
+        method: "POST",
+        body: JSON.stringify({userId: userId, eventId: eventId})
+    })
+    if (response.ok) {
+        const rsvp = await response.json();
+        dispatch(createRSVP(rsvp));
+        return rsvp;
+    }
+    return false;
+}
 
 const dbReducer = (state = initialState, action) => {
     let newState;
@@ -72,6 +50,12 @@ const dbReducer = (state = initialState, action) => {
                 newState[resource] = action.database[resource]
             }
             return newState
+        case CREATE_RSVP:
+            newState = Object.assign({}, state);
+            debugger;
+            const newArr = [...newState.events.RSVPs, action.rsvp];
+            newState.events.RSVPs = newArr;
+            return newState;
         default:
             return state;
     }

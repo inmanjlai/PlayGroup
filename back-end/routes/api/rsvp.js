@@ -12,10 +12,11 @@ router.post('/', asyncHandler(async(req, res) => {
 
     const { userId, eventId } = req.body;
     const exists = await RSVP.findOne({where: { userId, eventId }});
-    console.log(exists, userId, eventId, "<---------------------------------------------")
+    
     if(exists){
-        await exists.destroy();
+        const deleted = await exists.destroy();
         console.log("RSVP destroyed")
+        return res.json(deleted);
     } else {
         const rsvp = await RSVP.create({
             userId,
