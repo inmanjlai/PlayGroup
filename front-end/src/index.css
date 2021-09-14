@@ -18,7 +18,7 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 34%;
+    grid-template-rows: max-content auto 34%;
     grid-template-areas:
     "navbar"
     "main"

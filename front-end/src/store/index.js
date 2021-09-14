@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import eventReducer from "./events";
 import gamesReducer from "./games";
+import groupsReducer from "./groups";
 import locationsReducer from "./locations";
 import rsvpReducer from "./rsvp";
 import loginUserReducer from "./session";
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   events: eventReducer,
   rsvps: rsvpReducer,
   locations: locationsReducer,
-  games: gamesReducer
+  games: gamesReducer,
+  groups: groupsReducer
 });
 
 let enhancer;

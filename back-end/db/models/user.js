@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "groupId"
     }
 
-    User.belongsToMany(models.Group, { columnMapping })
+    User.belongsToMany(models.Group, columnMapping)
   };
 
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
