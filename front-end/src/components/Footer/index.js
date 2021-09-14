@@ -1,12 +1,13 @@
 import "./Footer.css"
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     return (
         <footer>
             <div className="container">
                 <div className="get-started">
-                    <h2>Create your own PlayGroup.</h2>
-                    <button>Get Started</button>
+                    <h2> Create your own PlayGroup.</h2>
+                    <NavLink to="groups/new">Get Started</NavLink>
                 </div>
 
 

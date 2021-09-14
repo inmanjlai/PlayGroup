@@ -38,6 +38,7 @@
     /* overflow-y: scroll; */
     border: 1px solid black;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .groups-container details[open] {
@@ -48,6 +49,10 @@
 
 .groups-container details[open]::-webkit-scrollbar {
     display: none;
+}
+
+summary::-webkit-details-marker {
+     display:none;
 }
 
 .groups-container details[open] summary {
