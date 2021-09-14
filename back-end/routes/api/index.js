@@ -3,9 +3,10 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const eventsRouter = require('./events')
 const gamesRouter = require('./games')
-const dbRouter = require('./database')
 const rsvpRouter = require('./rsvp');
 const locationsRouter = require('./locations')
+const groupsRouter = require('./groups');
+const userGroupsRouter = require('./userGroups')
 
 
 router.use('/session', sessionRouter);
@@ -20,7 +21,9 @@ router.use('/locations', locationsRouter)
 
 router.use('/rsvps', rsvpRouter)
 
-router.use('/db', dbRouter)
+router.use('/groups', groupsRouter)
+
+router.use('/userGroups', userGroupsRouter)
 
 
 module.exports = router;
