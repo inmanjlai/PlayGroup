@@ -1,7 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import dbReducer from "./db";
 import eventReducer from "./events";
+import gamesReducer from "./games";
+import locationsReducer from "./locations";
+import rsvpReducer from "./rsvp";
 import loginUserReducer from "./session";
 
 
@@ -9,7 +11,9 @@ const rootReducer = combineReducers({
   // add reducer functions here
   session: loginUserReducer,
   events: eventReducer,
-  db: dbReducer
+  rsvps: rsvpReducer,
+  locations: locationsReducer,
+  games: gamesReducer
 });
 
 let enhancer;

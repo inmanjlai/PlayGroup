@@ -1,11 +1,14 @@
 import { csrfFetch } from "./csrf";
 
 export const GET_EVENTS = 'event/GET_EVENTS'
-export const GET_GAMES = 'games/GET_GAMES'
 export const CREATE_EVENT = 'event/CREATE_EVENT'
 export const EDIT_EVENT = 'event/EDIT_EVENT'
 export const DELETE_EVENT = 'event/DELETE_EVENT'
-export const CREATE_RSVP = 'event/CREATE_RSVP'
+
+const createEvent = (event) => ({
+    type: CREATE_EVENT,
+    event
+})
 
 const getEvents = (events) => ({
     type: GET_EVENTS,
@@ -17,19 +20,10 @@ const editEvent = (formData) => ({
     formData
 })
 
-const createEvent = (event) => ({
-    type: CREATE_EVENT,
-    event
-})
 
-const deleteEvent = (formData) => ({
+const deleteEvent = (event) => ({
     type: DELETE_EVENT,
-    formData
-})
-
-const createRSVP = (rsvp) => ({
-    type: CREATE_RSVP,
-    rsvp
+    event
 })
 
 const initialState = {};
@@ -90,28 +84,24 @@ export const deleteOneEvent = (formData) => async(dispatch) => {
     return false;
 }
 
-export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
-    console.log("creating request with", userId, eventId)
-    const response = await csrfFetch('/api/rsvp', 
-    {
-        method: "POST",
-        body: JSON.stringify({userId: userId, eventId: eventId})
-    })
-    console.log("req created", response.ok)
-    if (response.ok) {
-        const rsvp = await response.json();
-        dispatch(createRSVP(rsvp));
-        return rsvp;
-    }
-    return false;
-}
-
 const eventReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
         case GET_EVENTS:
             newState = Object.assign({}, state);
-            action.events.forEach((event) => newState[event.id] = event);
+            newState = [...action.events];
+            return newState;
+        case CREATE_EVENT:
+            newState = Object.assign({}, state);
+            newState[action.event.id] = action.event;
+            return newState;
+        case DELETE_EVENT:
+            newState = Object.assign({}, state);
+            for(let event in newState){
+                if(newState[event].id === action.event.id){
+                    delete newState[event]
+                }
+            }
             return newState;
         default:
             return state;

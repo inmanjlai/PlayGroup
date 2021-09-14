@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router";
-import { getEntireDatabase } from "../../../store/db";
 import { deleteOneEvent, editOneEvent } from "../../../store/events";
+import { getAllGames } from "../../../store/games";
+import { getAllLocations } from "../../../store/locations";
 
 const EditFormPage = () => {
 
@@ -12,32 +13,30 @@ const EditFormPage = () => {
     
     const { eventId } = params;
 
-    // const currentEvent = events.find((event) => event.id === eventId)
-
     const [name, setName] = useState("")
     const [format, setFormat] = useState(1)
     const [locationId, setLocationId] = useState(1)
     const [hostId, setHostId] = useState(1)
     const [date, setDate] = useState("")
+
     const user = useSelector((state) => state.session.user)
-    const games = useSelector((state) => state.db.games)
-    const locations = useSelector((state) => state.db.locations)
-
-    const allGames = [];
-    for (const key in games) {
-        allGames.push(games[key]);
-    }
-
-    const allLocations = [];
-    for (const key in locations) {
-        allLocations.push(locations[key]);
-    }
-
 
     useEffect(() => {
         setHostId(user.id)
-        dispatch(getEntireDatabase())
+        dispatch(getAllGames())
+        dispatch(getAllLocations())
     }, [])
+
+    const games = useSelector((state) => state.games);
+    const allGames = [];
+    for(let key in games) {
+        allGames.push(games[key]);
+    }
+    const locations = useSelector((state) => state.locations)
+    const allLocations = [];
+    for(let key in locations) {
+        allLocations.push(locations[key]);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
