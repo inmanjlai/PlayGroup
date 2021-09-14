@@ -1,0 +1,59 @@
+.groups-container {
+    justify-self: center;
+    grid-area:main;
+    min-height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.groups-container div {
+    background: rgba(117, 117, 117, 0.2);
+    padding: 1rem;
+    margin: 1rem;
+    height: 50%;
+    width: 33%;
+    border: 1px solid rgba(117, 117, 117, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(117, 117, 117, 0.3) ;
+}
+
+.groups-container div h1 {
+    text-align: center;
+    padding: 0.5rem 0.5rem 0.5 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(117, 117, 117, 0.5);
+}
+
+.groups-container div > p {
+    padding: 1rem 0;
+}
+
+.groups-container details {
+    float: right;
+    padding: 1rem;
+    background: white;
+    border-radius: 5px;
+    /* overflow-y: scroll; */
+    border: 1px solid black;
+    transition: 0.3s;
+}
+
+.groups-container details[open] {
+    height: 200px;
+    box-shadow: 0 5px 10px rgba(117, 117, 117, 0.6) ;
+    overflow-y: scroll;
+}
+
+.groups-container details[open]::-webkit-scrollbar {
+    display: none;
+}
+
+.groups-container details[open] summary {
+    padding-bottom: 1rem;
+}
+
+.groups-container span {
+    font-weight: bold;
+}

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router';
-import { createOneEvent } from '../../store/events';
-import { getAllGames } from '../../store/games';
-import { getAllLocations } from '../../store/locations';
+import { createOneEvent } from '../../../store/events';
+import { getAllGames } from '../../../store/games';
+import { getAllLocations } from '../../../store/locations';
 const { useState, useEffect } = require("react")
 
 const CreateEventForm = () => {

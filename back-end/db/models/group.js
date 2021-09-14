@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "userId"
     }
 
-    Group.belongsToMany(models.User, { columnMapping })
+    Group.belongsToMany(models.User, columnMapping)
   };
   return Group;
 };

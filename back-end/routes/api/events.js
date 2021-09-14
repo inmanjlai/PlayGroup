@@ -22,7 +22,7 @@ router.post('/', requireAuth, asyncHandler(async(req, res) => {
         locationId
     })
 
-    const theEvent = await Event.findOne({where: {hostId, date, format, name, locationId}, include: { all: true }})
+    const theEvent = await Event.findOne({where: {hostId, date, gameId: format, name, locationId}, include: { all: true }})
     return res.json(theEvent);
 }))
 

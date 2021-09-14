@@ -7,9 +7,10 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Events from "./components/Events";
-import CreateEventForm from "./components/CreateEventForm";
+import CreateEventForm from "./components/Events/CreateEventForm";
 import EditFormPage from "./components/Events/EditEventPage";
 import { getAllEvents } from "./store/events";
+import Groups from "./components/Groups";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route exact path="/events/:eventId/edit">
             <EditFormPage />
+          </Route>
+          <Route exact path="/groups">
+            <Groups />
           </Route>
         </Switch>
       )}
