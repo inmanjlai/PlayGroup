@@ -49,11 +49,9 @@ router.delete('/', requireAuth, asyncHandler(async(req, res) => {
 
     const event = await Event.findOne({where: {id: eventId}})
 
-    console.log(event, "<----------------------------------")
-
     await event.destroy()
 
-    return res.json({message: "event deleted successfully"});
+    return res.json({id: event.id, message: "event deleted successfully"});
 }))
 
 

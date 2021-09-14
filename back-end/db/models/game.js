@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Game.associate = function(models) {
     // associations can be defined here
-    Game.hasMany(models.Event, {foreignKey:"gameId"})
+    Game.hasMany(models.Event, {foreignKey:"gameId", onDelete: 'cascade', hooks:true})
   };
   return Game;
 };
