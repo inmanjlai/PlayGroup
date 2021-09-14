@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -9,13 +9,19 @@ import Footer from "./components/Footer";
 import Events from "./components/Events";
 import CreateEventForm from "./components/CreateEventForm";
 import EditFormPage from "./components/Events/EditEventPage";
+import { getAllEvents } from "./store/events";
 
 function App() {
   const dispatch = useDispatch();
+
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(getAllEvents())
   }, [dispatch]);
+
+  const events = useSelector((state) => state.events)
 
   return (
     <>
@@ -29,7 +35,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/events">
-            <Events />
+            <Events events={events}/>
           </Route>
           <Route exact path="/events/new">
             <CreateEventForm />

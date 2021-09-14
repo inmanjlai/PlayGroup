@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router';
-import { getEntireDatabase } from '../../store/db';
 import { createOneEvent } from '../../store/events';
+import { getAllGames } from '../../store/games';
+import { getAllLocations } from '../../store/locations';
 const { useState, useEffect } = require("react")
 
 const CreateEventForm = () => {
@@ -17,22 +18,20 @@ const CreateEventForm = () => {
     const history = useHistory()
 
     useEffect(() => {
-        dispatch(getEntireDatabase())
+        dispatch(getAllLocations())
+        dispatch(getAllGames())
         setHostId(user.id)
     },[dispatch])
         
-
+    const games = useSelector((state) => state.games);
     const allGames = [];
-    const allLocations = [];
-    const games = useSelector((state) => state.db.games);
-    const locations = useSelector((state) => state.db.locations);
-
-    for (const key in locations) {
-        allLocations.push(locations[key]);
-    }
-
-    for (const key in games) {
+    for(let key in games) {
         allGames.push(games[key]);
+    }
+    const locations = useSelector((state) => state.locations)
+    const allLocations = [];
+    for(let key in locations) {
+        allLocations.push(locations[key]);
     }
 
     const handleSubmit = (e) => {
