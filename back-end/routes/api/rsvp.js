@@ -20,7 +20,8 @@ router.post('/', asyncHandler(async(req, res) => {
             eventId
         })
         console.log("RSVP created")
-        return res.json(rsvp);
+        const newRsvp = await RSVP.findOne({where: {userId, eventId}, include: {all:true}})
+        return res.json(newRsvp);
     }
 }))
 

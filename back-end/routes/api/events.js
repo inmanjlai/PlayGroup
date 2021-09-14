@@ -21,7 +21,9 @@ router.post('/', requireAuth, asyncHandler(async(req, res) => {
         date,
         locationId
     })
-    return res.json(event);
+
+    const theEvent = await Event.findOne({where: {hostId, date, format, name, locationId}, include: { all: true }})
+    return res.json(theEvent);
 }))
 
 router.put('/', requireAuth, asyncHandler(async(req, res) => {
