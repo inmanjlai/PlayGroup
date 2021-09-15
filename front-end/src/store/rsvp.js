@@ -20,13 +20,12 @@ const deleteRSVP = (rsvp) => ({
     rsvp
 })
 
-const createRSVP = (eventId, rsvp) => ({
+const createRSVP = (rsvp) => ({
     type: CREATE_RSVP,
-    eventId,
     rsvp
 })
 
-const initialState = {};
+const initialState = {rsvps: null};
 
 export const getAllRSVPs = () => async(dispatch) => {
 
@@ -63,23 +62,21 @@ export const deleteOneRSVP = ({userId, eventId}) => async(dispatch) => {
     )
     if(response.ok){
         const rsvp = await response.json();
-        dispatch(deleteRSVP(rsvp))
+        dispatch(getRSVPs(rsvp))
         return rsvp;
     }
     return false;
 }
 
 export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
-    console.log("creating request with", userId, eventId)
     const response = await csrfFetch('/api/rsvps', 
     {
         method: "POST",
         body: JSON.stringify({userId: userId, eventId: eventId})
     })
-    console.log("req created", response.ok)
     if (response.ok) {
         const rsvp = await response.json();
-        dispatch(createRSVP(eventId, rsvp));
+        dispatch(createRSVP(rsvp));
         return rsvp;
     }
     return false;
@@ -90,21 +87,15 @@ const rsvpReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_RSVPS:
             newState = Object.assign({}, state);
-            // action.rsvp.forEach((rsvp) => newState[rsvp.id] = rsvp);
-            newState = [...action.rsvp]
+            newState.rsvps = action.rsvp
             return newState;
         case CREATE_RSVP:
             debugger;
             newState = Object.assign({}, state);
-            newState[action.rsvp.id] = action.rsvp;
+            newState.rsvps[action.rsvp.id] = action.rsvp;
             return newState;
         case DELETE_RSVP:
-            newState = Object.assign({}, state);
-            for(let rsvp in newState){
-                if(newState[rsvp].id === action.rsvp.id){
-                    delete newState[rsvp]
-                }
-            }
+            // being handled by calling getrsvps in the delete thunk
             return newState;
         default:
             return state;

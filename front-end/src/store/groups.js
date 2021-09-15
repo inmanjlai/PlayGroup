@@ -25,13 +25,14 @@ const deleteGroup = (group) => ({
     group
 });
 
-const initialState = {};
+const initialState = {groups: null};
 
 export const getAllGroups = () => async(dispatch) => {
 
     const response = await csrfFetch("/api/groups");
     if(response.ok){
         const groups = await response.json();
+        console.log(groups, "<----- GROUPS")
         dispatch(getGroups(groups));
         return groups;
     }
@@ -80,7 +81,7 @@ export const deleteOneGroup = (groupId) => async(dispatch) => {
 
     if(response.ok) {
         const group = await response.json();
-        dispatch(deleteGroup(group))
+        dispatch(getGroups(group))
         return group;
     }
 } 
@@ -90,24 +91,18 @@ const groupsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_GROUPS:
             newState = Object.assign({}, state);
-            newState = [...action.groups]
+            newState.groups = action.groups
             return newState;
         case CREATE_GROUP:
             newState = Object.assign({}, state);
-            newState[action.group.id] = action.group;
+            newState.groups[action.group.id] = action.group;
             return newState;
         case EDIT_GROUP:
             newState = Object.assign({}, state);
-            newState[action.group.id] = action.group;
+            newState.groups[action.group.id] = action.group;
             return newState;
         case DELETE_GROUP:
-            newState = Object.assign({}, state);
-            delete newState[action.group.id];
-            // for(let rsvp in newState){
-            //     if(newState[rsvp].id === action.rsvp.id){
-            //         delete newState[rsvp]
-            //     }
-            // }
+            // being handled by just dispatching(getGroups(group)) in the delete thunk
             return newState;
         default:
             return state;

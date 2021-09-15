@@ -7,7 +7,7 @@ const getLocations = (locations) => ({
     locations
 });
 
-const initialState = {};
+const initialState = {locations: null};
 
 export const getAllLocations = () => async(dispatch) => {
 
@@ -25,7 +25,7 @@ const locationsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_LOCATIONS:
             newState = Object.assign({}, state);
-            newState = [...action.locations]
+            newState.locations = action.locations
             return newState;
         default:
             return state;

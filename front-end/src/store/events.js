@@ -15,9 +15,9 @@ const getEvents = (events) => ({
     events
 });
 
-const editEvent = (formData) => ({
+const editEvent = (event) => ({
     type: EDIT_EVENT,
-    formData
+    event
 })
 
 
@@ -26,7 +26,7 @@ const deleteEvent = (event) => ({
     event
 })
 
-const initialState = {};
+const initialState = {events: null};
 
 export const getAllEvents = () => async(dispatch) => {
 
@@ -89,11 +89,15 @@ const eventReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_EVENTS:
             newState = Object.assign({}, state);
-            newState = [...action.events];
+            newState.events = action.events
             return newState;
         case CREATE_EVENT:
             newState = Object.assign({}, state);
-            newState[action.event.id] = action.event;
+            newState.events[action.event.id] = action.event;
+            return newState;
+        case EDIT_EVENT:
+            newState = Object.assign({}, state);
+            newState.events[action.event.id] = action.event
             return newState;
         case DELETE_EVENT:
             newState = Object.assign({}, state);

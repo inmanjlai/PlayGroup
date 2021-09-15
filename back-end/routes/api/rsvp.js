@@ -33,8 +33,10 @@ router.delete('/', asyncHandler(async(req, res) => {
     if(exists){
         const deleted = await exists.destroy();
         console.log("RSVP destroyed")
-        return res.json({id: exists.id});
     }
+    
+    const allRSVPS = await RSVP.findAll({include: {all:true}})
+    return res.json(allRSVPS);
 }))
 
 
