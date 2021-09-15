@@ -13,6 +13,11 @@ module.exports = {
         allowNull: false,
         defaultValue: "Magic: the Gathering Event"
       },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: "https://cdn.shopify.com/s/files/1/0002/4680/8603/products/sjDBHUW_1600x1600.png?v=1606994170"
+      },
       hostId: {
         type: Sequelize.INTEGER,
         allowNull: false,
