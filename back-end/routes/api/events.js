@@ -42,7 +42,8 @@ router.put('/', requireAuth, asyncHandler(async(req, res) => {
         locationId
     })
 
-    return res.json(event);
+    const updatedEvent = await Event.findByPk(eventId);
+    return res.json(updatedEvent);
 }))
 
 router.delete('/', requireAuth, asyncHandler(async(req, res) => {

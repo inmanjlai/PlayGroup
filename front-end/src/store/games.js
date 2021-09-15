@@ -7,7 +7,7 @@ const getGames = (games) => ({
     games
 });
 
-const initialState = {};
+const initialState = {games: null};
 
 export const getAllGames = () => async(dispatch) => {
 
@@ -25,7 +25,7 @@ const gamesReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_GAMES:
             newState = Object.assign({}, state);
-            newState = [...action.games]
+            newState.games = action.games
             return newState;
         default:
             return state;

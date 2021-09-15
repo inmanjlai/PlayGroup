@@ -24,7 +24,6 @@ function App() {
     dispatch(getAllEvents())
   }, [dispatch]);
 
-  const events = useSelector((state) => state.events)
 
   return (
     <>
@@ -38,7 +37,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/events">
-            <Events events={events}/>
+            <Events />
           </Route>
           <Route exact path="/events/new">
             <CreateEventForm />

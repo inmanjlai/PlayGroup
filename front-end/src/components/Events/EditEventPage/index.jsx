@@ -27,16 +27,9 @@ const EditFormPage = () => {
         dispatch(getAllLocations())
     }, [])
 
-    const games = useSelector((state) => state.games);
-    const allGames = [];
-    for(let key in games) {
-        allGames.push(games[key]);
-    }
-    const locations = useSelector((state) => state.locations)
-    const allLocations = [];
-    for(let key in locations) {
-        allLocations.push(locations[key]);
-    }
+    const games = useSelector((state) => state.games.games);
+    const locations = useSelector((state) => state.locations.locations)
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -83,7 +76,7 @@ const EditFormPage = () => {
                         onChange={(e) => setFormat(e.target.value)}
                         name="format"
                         >
-                        {allGames.map((game) => <option value={game.id} key={game.id}>{game.name}</option> )}
+                        {games.map((game) => <option value={game.id} key={game.id}>{game.name}</option> )}
                     </select>
 
                     <label htmlFor="date">Event Date</label>
@@ -99,7 +92,7 @@ const EditFormPage = () => {
                         onChange={(e) => setLocationId(e.target.value)}
                         name="locationId"
                         >
-                        {allLocations.map((location) => <option value={location.id} key={location.id}>{location.name}</option> )}
+                        {locations.map((location) => <option value={location.id} key={location.id}>{location.name}</option> )}
                     </select>
 
                     <button type="submit">Submit</button>

@@ -37,7 +37,9 @@ router.delete('/', asyncHandler(async(req, res) => {
     const groups = await Group.findOne({where: { id: groupId }, include: {all: true}});
     await groups.destroy();
 
-    return res.json(groups);
+    const allGroups = await Group.findAll({include: {all:true}})
+
+    return res.json(allGroups);
 }))
 
 router.put('/', asyncHandler(async(req, res) => {
@@ -50,7 +52,8 @@ router.put('/', asyncHandler(async(req, res) => {
         description,
     })
 
-    return res.json(group);
+    const updatedGroup = await Group.findByPk(groupId)
+    return res.json(updatedGroup);
 }))
 
 

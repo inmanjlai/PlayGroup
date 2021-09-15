@@ -35,13 +35,9 @@ const restoreUser = (req, res, next) => {
       }
   
       try {
-        console.log("before id is defined, inside the try")
         const { id } = jwtPayload.data;
-        console.log(`after ${id} is defined, inside the try`)
         req.user = await User.scope('currentUser').findByPk(id);
-        console.log(`after ${req.user} has been created inside the try`)
       } catch (e) {
-        console.log("inside the catch, the error is:", e)
         // res.clearCookie('token');
         return next();
       }

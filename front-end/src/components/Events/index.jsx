@@ -2,26 +2,24 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from 'react-router-dom'
 import './Events.css'
-import { createOneRSVP, deleteOneRSVP } from "../../store/rsvp"
+import { createOneRSVP, deleteOneRSVP, getAllRSVPs } from "../../store/rsvp"
 import { getAllEvents } from "../../store/events"
 
-const Events = ({events}) => {
+const Events = () => {
     const dispatch = useDispatch()
     
     const user = useSelector((state) => state.session.user)
+    const events = useSelector((state) => state.events.events)
+    const rsvps = useSelector((state) => state.rsvps.rsvps)
     
     useEffect(() => {
         dispatch(getAllEvents())
+        dispatch(getAllRSVPs())
     },[dispatch])
-    
-    const allEvents = [];
-    for(let key in events) {
-        allEvents.push(events[key]);
-    }
 
         return (
             <div className="card-container">
-                {allEvents.map((event) => (
+                {events?.map((event) => (
                     <div className="event-card" key={event.id}>
                         <h2>{event.name}</h2>
                         <p>Host: {event.User.username}</p>
