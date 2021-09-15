@@ -13,12 +13,13 @@ router.get('/', asyncHandler(async(req, res) => {
 
 router.post('/', asyncHandler(async(req, res) => {
 
-    const {name, description, ownerId} = req.body;
+    const {name, description, ownerId, image} = req.body;
 
     const group = await Group.create({
         name,
         description,
-        ownerId
+        ownerId,
+        image
     })
 
     const groups = await Group.findOne({where: {name, ownerId, description}, include: {all: true}});
@@ -44,12 +45,13 @@ router.delete('/', asyncHandler(async(req, res) => {
 
 router.put('/', asyncHandler(async(req, res) => {
 
-    const {groupId, name, description} = req.body;
+    const {groupId, name, description, image} = req.body;
     
     const group = await Group.findOne({where: {id: groupId}, include: {all: true}});
     await group.update({
         name,
         description,
+        image
     })
 
     const updatedGroup = await Group.findByPk(groupId)

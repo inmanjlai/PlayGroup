@@ -12,14 +12,15 @@ router.get('/', asyncHandler(async(req, res) => {
 
 router.post('/', requireAuth, asyncHandler(async(req, res) => {
 
-    const { name, format, date, locationId, hostId } = req.body;
+    const { name, format, date, locationId, hostId, image } = req.body;
 
     const event = await Event.create({
         name,
         gameId: format,
         hostId,
         date,
-        locationId
+        locationId,
+        image
     })
 
     const theEvent = await Event.findOne({where: {hostId, date, gameId: format, name, locationId}, include: { all: true }})
@@ -28,7 +29,7 @@ router.post('/', requireAuth, asyncHandler(async(req, res) => {
 
 router.put('/', requireAuth, asyncHandler(async(req, res) => {
 
-    const { name, format, date, locationId, hostId, eventId } = req.body;
+    const { image, name, format, date, locationId, hostId, eventId } = req.body;
 
     const event = await Event.findOne({where: {id: eventId}})
 
@@ -39,7 +40,8 @@ router.put('/', requireAuth, asyncHandler(async(req, res) => {
         gameId: format,
         hostId,
         date,
-        locationId
+        locationId,
+        image
     })
 
     const updatedEvent = await Event.findByPk(eventId);

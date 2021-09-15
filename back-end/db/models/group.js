@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Group = sequelize.define('Group', {
     name: DataTypes.STRING,
+    image:DataTypes.STRING,
     description: DataTypes.TEXT,
     ownerId: DataTypes.INTEGER
   }, {});
