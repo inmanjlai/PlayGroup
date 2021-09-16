@@ -12,6 +12,7 @@ const CreateEventForm = () => {
     const [date, setDate] = useState("")
     const [locationId, setLocationId] = useState(1)
     const [hostId, setHostId] = useState(1);
+    const [image, setImage] = useState("")
 
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch()
@@ -20,8 +21,11 @@ const CreateEventForm = () => {
     useEffect(() => {
         dispatch(getAllLocations())
         dispatch(getAllGames())
-        setHostId(user.id)
     },[dispatch])
+    
+    useEffect(() => {
+        setHostId(user.id)
+    }, [user.id])
         
     const games = useSelector((state) => state.games.games);
     const locations = useSelector((state) => state.locations.locations)
@@ -30,7 +34,7 @@ const CreateEventForm = () => {
         e.preventDefault();
 
         const form = {
-            name, format, date, locationId, hostId
+            name, format, date, locationId, hostId, image
         }
         dispatch(createOneEvent(form))
         history.push('/events')
@@ -77,6 +81,13 @@ const CreateEventForm = () => {
                 >
                     {locations?.map((location) => <option value={location.id} key={location.id}>{location.name}</option> )}
                 </select>
+                <label htmlFor="name">Image Url</label>
+                <input 
+                    type="text"
+                    name="image"
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
+                />
 
                 <button type="submit">Submit</button>
             </form>

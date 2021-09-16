@@ -84,6 +84,35 @@ export const deleteOneEvent = (formData) => async(dispatch) => {
     return false;
 }
 
+export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
+    const response = await csrfFetch('/api/rsvps', 
+    {
+        method: "POST",
+        body: JSON.stringify({userId: userId, eventId: eventId})
+    })
+    if (response.ok) {
+        const events = await response.json();
+        dispatch(getEvents(events));
+        return events;
+    }
+    return false;
+}
+
+export const deleteOneRSVP = ({userId, eventId}) => async(dispatch) => {
+    const response = await csrfFetch('/api/rsvps', 
+        {
+            method: "DELETE",
+            body: JSON.stringify({userId: userId, eventId:eventId})
+        }
+    )
+    if(response.ok){
+        const events = await response.json();
+        dispatch(getEvents(events))
+        return events;
+    }
+    return false;
+}
+
 const eventReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {

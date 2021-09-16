@@ -67,3 +67,12 @@ footer {
 .account-list ul li, .discover-list ul li, .about-list ul li {
     padding: 0.5rem 0;
 }
+
+.account-list a, .discover-list a, .about-list a {
+    color: rgba(197, 196, 196, 1);
+    text-decoration: none;
+}
+
+.account-list a:hover, .discover-list a:hover, .about-list a:hover {
+    text-decoration: underline;
+}

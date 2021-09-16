@@ -15,15 +15,15 @@ const editRSVP = (formData) => ({
     formData
 })
 
-const deleteRSVP = (rsvp) => ({
-    type: DELETE_RSVP,
-    rsvp
-})
+// const deleteRSVP = (rsvp) => ({
+//     type: DELETE_RSVP,
+//     rsvp
+// })
 
-const createRSVP = (rsvp) => ({
-    type: CREATE_RSVP,
-    rsvp
-})
+// const createRSVP = (rsvp) => ({
+//     type: CREATE_RSVP,
+//     rsvp
+// })
 
 const initialState = {rsvps: null};
 
@@ -53,35 +53,6 @@ export const editOneRSVP = ({userId, eventId}) => async(dispatch) => {
     return false;
 }
 
-export const deleteOneRSVP = ({userId, eventId}) => async(dispatch) => {
-    const response = await csrfFetch('/api/rsvps', 
-        {
-            method: "DELETE",
-            body: JSON.stringify({userId: userId, eventId:eventId})
-        }
-    )
-    if(response.ok){
-        const rsvp = await response.json();
-        dispatch(getRSVPs(rsvp))
-        return rsvp;
-    }
-    return false;
-}
-
-export const createOneRSVP = ({userId, eventId}) => async(dispatch) => {
-    const response = await csrfFetch('/api/rsvps', 
-    {
-        method: "POST",
-        body: JSON.stringify({userId: userId, eventId: eventId})
-    })
-    if (response.ok) {
-        const rsvp = await response.json();
-        dispatch(createRSVP(rsvp));
-        return rsvp;
-    }
-    return false;
-}
-
 const rsvpReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
@@ -90,7 +61,6 @@ const rsvpReducer = (state = initialState, action) => {
             newState.rsvps = action.rsvp
             return newState;
         case CREATE_RSVP:
-            debugger;
             newState = Object.assign({}, state);
             newState.rsvps[action.rsvp.id] = action.rsvp;
             return newState;
