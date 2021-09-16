@@ -20,7 +20,7 @@ const Events = () => {
         for(let groupMember in event.RSVPs){
             let member = event.RSVPs[groupMember]
             console.log(member, "<---------")
-            if(member.userId === user.id){
+            if(member?.userId === user?.id){
                 return true
             }
         }
@@ -61,7 +61,7 @@ const Events = () => {
 
                             <div className="user-controls">
 
-                                {user.id !== event.hostId ? (!alreadyMember(event) ? ( <button className="attend-button" onClick={(e) => dispatch(createOneRSVP({userId: user.id, eventId: event.id}))}>Attend Event</button> ) : ( <button className='attend-button-leave' onClick={(e) => dispatch(deleteOneRSVP({userId: user.id, eventId: event.id}))}>Cancel Attend</button> )) : false}
+                                {user && (user?.id !== event.hostId ? (!alreadyMember(event) ? ( <button className="attend-button" onClick={(e) => dispatch(createOneRSVP({userId: user.id, eventId: event.id}))}>Attend Event</button> ) : ( <button className='attend-button-leave' onClick={(e) => dispatch(deleteOneRSVP({userId: user.id, eventId: event.id}))}>Cancel Attend</button> )) : false)}
 
                                 {user && event?.User?.id === user.id ? <button className="edit-button"><NavLink to={`/events/${event.id}/edit`}>Edit</NavLink></button> : false}
                             </div>

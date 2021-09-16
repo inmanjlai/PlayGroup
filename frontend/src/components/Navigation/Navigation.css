@@ -30,11 +30,12 @@ nav {
     border-radius: 5px;
     border: 1px solid black;
     position: absolute;
-    top: 8%;
-    right: 10px;
+    top: 10%;
+    right: 3rem;
     list-style: none;
     display: flex;
     flex-direction: column;
+    z-index: 2;
 }
 
 .profile-dropdown li {

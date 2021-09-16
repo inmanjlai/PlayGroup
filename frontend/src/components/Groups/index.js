@@ -17,7 +17,7 @@ const Groups = () => {
     let alreadyMember = (group) => {
         for(let groupMember in group.Users){
             let member = group.Users[groupMember]
-            if(member.id === user.id){
+            if(member?.id === user?.id){
                 return true
             }
         }
@@ -55,10 +55,10 @@ const Groups = () => {
                             <p>{group.description}</p>
                         </div>
                         <div className="user-controls">
-                            {user.id === group.ownerId ? <button className="edit-button"><NavLink to={`/groups/${group.id}/edit`}>Edit Group</NavLink></button>  : false}
+                            {user?.id === group?.ownerId ? <button className="edit-button"><NavLink to={`/groups/${group.id}/edit`}>Edit Group</NavLink></button>  : false}
 
                             {/* THIS REALLY UGLY LINE ALLOWS USERS TO JOIN AND LEAVE GROUPS IF THE GROUP DOES NOT BELONG TO THEM */}
-                            {user.id !== group.ownerId ? (!alreadyMember(group) ? ( <button className="group-button" onClick={(e) => dispatch(joinOneGroup({groupId: group.id, userId: user.id}))}>Join Group</button> ) : ( <button className='group-button-leave' onClick={(e) => dispatch(leaveOneGroup({groupId: group.id, userId: user.id}))}>Leave Group</button> )) : false}
+                            {user && (user?.id !== group?.ownerId ? (!alreadyMember(group) ? ( <button className="group-button" onClick={(e) => dispatch(joinOneGroup({groupId: group.id, userId: user.id}))}>Join Group</button> ) : ( <button className='group-button-leave' onClick={(e) => dispatch(leaveOneGroup({groupId: group.id, userId: user.id}))}>Leave Group</button> )) : false)}
                         </div>
                     </div>
                 )

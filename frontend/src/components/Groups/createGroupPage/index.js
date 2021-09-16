@@ -16,8 +16,8 @@ const CreateGroupPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setOwnerId(user.id)
-    },[user.id])
+        setOwnerId(user?.id)
+    },[user?.id])
 
     const handleCreate = (e) => {
         e.preventDefault();
