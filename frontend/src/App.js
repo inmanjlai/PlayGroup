@@ -13,6 +13,8 @@ import { getAllEvents } from "./store/events";
 import Groups from "./components/Groups";
 import CreateGroupPage from "./components/Groups/createGroupPage";
 import EditGroupPage from "./components/Groups/EditGroupPage";
+import EventPage from "./components/Events/EventPage";
+import GroupPage from "./components/Groups/GroupPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +44,9 @@ function App() {
           <Route exact path="/events/new">
             <CreateEventForm />
           </Route>
+          <Route exact path="/events/:eventId">
+            <EventPage />
+          </Route>
           <Route exact path="/events/:eventId/edit">
             <EditFormPage />
           </Route>
@@ -50,6 +55,9 @@ function App() {
           </Route>
           <Route exact path="/groups/new">
             <CreateGroupPage />
+          </Route>
+          <Route exact path="/groups/:groupId">
+            <GroupPage />
           </Route>
           <Route exact path="/groups/:groupId/edit">
             <EditGroupPage />

@@ -44,12 +44,12 @@ const Groups = () => {
                             <img src={group.image} alt="nothing" />
                         </div>
                         <div className="title">
-                            <p>{group.name}</p>
+                            <NavLink to={`/groups/${group.id}`}>{group.name}</NavLink>
                         </div>
                         <div className="owner-members">
-                            <span>Group Owner: {group.Users.map((user) => user.id === group.ownerId ? <span key={user.id}>{user.username}</span> : false)}</span>
+                            <span>Group Owner: {group?.Users?.map((user) => user?.id === group?.ownerId ? <span key={user.id}>{user.username}</span> : false)}</span>
                             <p>•</p>
-                            <p>Members: {group.Users.length}</p>
+                            <p>Members: {group?.Users?.length}</p>
                         </div>
                         <div className="description">
                             <p>{group.description}</p>

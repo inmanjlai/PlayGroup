@@ -1,7 +1,8 @@
 import { csrfFetch } from "./csrf";
 
-const initialState = { user: null };
+const initialState = { user: null, allUsers: [] };
 
+export const GET_USERS = 'user/GET_USERS'
 export const SET_USER = "user/SET_USER"
 export const REMOVE_USER = "user/REMOVE_USER"
 
@@ -12,6 +13,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
     type: REMOVE_USER
+})
+
+const getAllUsers = (users) => ({
+    type: GET_USERS,
+    users
 })
 
 export const signup = (user) => async (dispatch) => {
@@ -58,9 +64,21 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
+export const getUsers = () => async(dispatch) => {
+    const response = await csrfFetch("/api/users");
+    if(response.ok) {
+        const users = await response.json();
+        dispatch(getAllUsers(users));
+    }
+}
+
 const loginUserReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
+        case GET_USERS:
+            newState = { ...state }
+            newState.allUsers = action.users
+            return newState;
         case SET_USER:
             newState = Object.assign({}, state)
             newState.user = action.payload;

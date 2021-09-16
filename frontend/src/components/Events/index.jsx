@@ -16,10 +16,8 @@ const Events = () => {
     },[dispatch])
 
     let alreadyMember = (event) => {
-        console.log(event)
         for(let groupMember in event.RSVPs){
             let member = event.RSVPs[groupMember]
-            console.log(member, "<---------")
             if(member?.userId === user?.id){
                 return true
             }
@@ -50,7 +48,7 @@ const Events = () => {
                                 <p>{event.date}</p>
                             </div>
                             <div className="title">
-                                <p>{event.name}</p>
+                                <NavLink to={`/events/${event.id}`}>{event.name}</NavLink>
                             </div>
 
                             <div className="location">
