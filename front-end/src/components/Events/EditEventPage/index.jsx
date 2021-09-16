@@ -18,14 +18,18 @@ const EditFormPage = () => {
     const [locationId, setLocationId] = useState(1)
     const [hostId, setHostId] = useState(1)
     const [date, setDate] = useState("")
+    const [image, setImage] = useState("")
 
     const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
-        setHostId(user.id)
         dispatch(getAllGames())
         dispatch(getAllLocations())
-    }, [])
+    }, [dispatch])
+    
+    useEffect(() => {
+        setHostId(user.id)
+    }, [user.id])
 
     const games = useSelector((state) => state.games.games);
     const locations = useSelector((state) => state.locations.locations)
@@ -35,7 +39,7 @@ const EditFormPage = () => {
         e.preventDefault();
 
         const formData = {
-            name, format, locationId, hostId, date, eventId
+            name, format, locationId, hostId, date, eventId, image
         }
         dispatch(editOneEvent(formData))
         history.push('/events')
@@ -76,7 +80,7 @@ const EditFormPage = () => {
                         onChange={(e) => setFormat(e.target.value)}
                         name="format"
                         >
-                        {games.map((game) => <option value={game.id} key={game.id}>{game.name}</option> )}
+                        {games?.map((game) => <option value={game.id} key={game.id}>{game.name}</option> )}
                     </select>
 
                     <label htmlFor="date">Event Date</label>
@@ -92,8 +96,16 @@ const EditFormPage = () => {
                         onChange={(e) => setLocationId(e.target.value)}
                         name="locationId"
                         >
-                        {locations.map((location) => <option value={location.id} key={location.id}>{location.name}</option> )}
+                        {locations?.map((location) => <option value={location.id} key={location.id}>{location.name}</option> )}
                     </select>
+                    <label htmlFor="name">Image Url</label>
+                    <input 
+                        type="text"
+                        name="image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    />
+                    
 
                     <button type="submit">Submit</button>
                 </form>

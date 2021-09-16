@@ -15,13 +15,13 @@ router.post('/', asyncHandler(async(req, res) => {
     const exists = await RSVP.findOne({where: { userId, eventId }});
 
     if(!exists){
-        const rsvp = await RSVP.create({
+        await RSVP.create({
             userId,
             eventId
         })
         console.log("RSVP created")
-        const newRsvp = await RSVP.findOne({where: {userId, eventId}, include: {all:true}})
-        return res.json(newRsvp);
+        const events = await Event.findAll({include: {all:true}})
+        return res.json(events);
     }
 }))
 
@@ -31,12 +31,12 @@ router.delete('/', asyncHandler(async(req, res) => {
     const exists = await RSVP.findOne({where: { userId, eventId }});
 
     if(exists){
-        const deleted = await exists.destroy();
+        await exists.destroy();
         console.log("RSVP destroyed")
     }
     
-    const allRSVPS = await RSVP.findAll({include: {all:true}})
-    return res.json(allRSVPS);
+    const events = await Event.findAll({include: {all:true}})
+    return res.json(events);
 }))
 
 

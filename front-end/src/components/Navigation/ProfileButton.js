@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import './Navigation.css'
 
@@ -30,7 +31,8 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
+    <div className="controls">
+      <NavLink to="/groups/new">Start a new group</NavLink>
       <button onClick={openMenu} className="drop-menu-btn">
         <i className="fas fa-user-circle" />
       </button>
@@ -45,7 +47,7 @@ function ProfileButton({ user }) {
           </li>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

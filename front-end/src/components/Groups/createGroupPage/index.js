@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router";
-import { createOneGroup, editOneGroup } from "../../../store/groups";
+import { useHistory } from "react-router";
+import { createOneGroup } from "../../../store/groups";
 
 const CreateGroupPage = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [ownerId, setOwnerId] = useState(1);
+    const [image, setImage] = useState("");
 
     const user = useSelector((state) => state.session.user)
-    const params = useParams()
-
-    const { groupId } = params;
 
     const history = useHistory();
     const dispatch = useDispatch();
 
     useEffect(() => {
         setOwnerId(user.id)
-    },[])
+    },[user.id])
 
     const handleCreate = (e) => {
         e.preventDefault();
@@ -27,7 +25,8 @@ const CreateGroupPage = () => {
          const formData = {
              name,
              description,
-             ownerId
+             ownerId,
+             image
          }
 
          dispatch(createOneGroup(formData))
@@ -55,6 +54,13 @@ const CreateGroupPage = () => {
                     name="name"
                     value={ownerId} 
                 />
+                <label htmlFor="name">Image Url</label>
+                    <input 
+                        type="text"
+                        name="image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                    />
                 <button>Submit</button>
             </form>
 

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { deleteOneEvent } from "../../../store/events";
-import { createOneGroup, deleteOneGroup, editOneGroup } from "../../../store/groups";
+import { deleteOneGroup, editOneGroup } from "../../../store/groups";
 
 const EditGroupPage = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [ownerId, setOwnerId] = useState(1);
+    const [image, setImage] = useState("");
 
     const user = useSelector((state) => state.session.user)
     const params = useParams()
@@ -20,7 +20,7 @@ const EditGroupPage = () => {
 
     useEffect(() => {
         setOwnerId(user.id)
-    },[])
+    },[user.id])
 
     const handleEdit = (e) => {
         e.preventDefault();
@@ -28,10 +28,9 @@ const EditGroupPage = () => {
          const formData = {
              name,
              description,
-             groupId
+             groupId,
+             image
          }
-
-         console.log(formData, "<---------------")
 
          dispatch(editOneGroup(formData))
          history.push('/groups')
@@ -65,6 +64,13 @@ const EditGroupPage = () => {
                     type="hidden" 
                     name="name"
                     value={ownerId} 
+                />
+                <label htmlFor="name">Image Url</label>
+                    <input 
+                        type="text"
+                        name="image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                 />
                 <button>Submit</button>
                 <button onClick={handleDelete}>Delete</button>

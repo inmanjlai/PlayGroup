@@ -5,7 +5,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     grid-area: navbar;
-    max-height: 74.16px;
+    max-height: 65px;
+    /* position:-webkit-sticky; */
 }
 
 .drop-menu-btn {
@@ -81,4 +82,13 @@ nav a:hover {
     margin-left: 2rem;
     font-family: 'DM Serif Display', serif;
     transition: color 0.5s;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.controls a {
+    color: teal;
 }

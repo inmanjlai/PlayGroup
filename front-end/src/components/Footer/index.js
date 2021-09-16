@@ -22,8 +22,9 @@ const Footer = () => {
                 <div className="discover-list">
                     <h3>Discover</h3>
                     <ul>
-                        <li>Groups</li>
-                        <li>Events</li>
+                        <li><NavLink to="/groups">Groups</NavLink></li>
+                        <li><NavLink to="/events">Events</NavLink></li>
+
                     </ul>
                 </div>
 
