@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router";
-import { deleteOneEvent, editOneEvent } from "../../../store/events";
+import { deleteOneEvent, editOneEvent, getAllEvents } from "../../../store/events";
 import { getAllGames } from "../../../store/games";
 import { getAllLocations } from "../../../store/locations";
 
@@ -13,16 +13,21 @@ const EditFormPage = () => {
     
     const { eventId } = params;
 
-    const [name, setName] = useState("")
-    const [format, setFormat] = useState(1)
-    const [locationId, setLocationId] = useState(1)
-    const [hostId, setHostId] = useState(1)
-    const [date, setDate] = useState("")
-    const [image, setImage] = useState("")
-
+    
     const user = useSelector((state) => state.session.user)
+    const events = useSelector((state) => state.events.events)
+    
+    const currentEvent = events?.find((event) => event.id === +eventId)
+    
+    const [name, setName] = useState(currentEvent?.name)
+    const [format, setFormat] = useState(currentEvent?.format)
+    const [locationId, setLocationId] = useState(currentEvent?.locationId)
+    const [hostId, setHostId] = useState(currentEvent?.hostId)
+    const [date, setDate] = useState(currentEvent?.date)
+    const [image, setImage] = useState(currentEvent?.image)
 
     useEffect(() => {
+        dispatch(getAllEvents())
         dispatch(getAllGames())
         dispatch(getAllLocations())
     }, [dispatch])
@@ -45,8 +50,7 @@ const EditFormPage = () => {
         history.push('/events')
     }
 
-    const handleDelete = (e) => {
-        e.preventDefault();
+    const handleDelete = () => {
 
         const formData = {eventId}
         dispatch(deleteOneEvent(formData))
@@ -90,7 +94,7 @@ const EditFormPage = () => {
                         value={date}
                         onChange={(e) => setDate(e.target.value)}    
                     />
-
+                    <label htmlFor="locationId">Location</label>
                     <select 
                         value={locationId}
                         onChange={(e) => setLocationId(e.target.value)}
@@ -108,11 +112,9 @@ const EditFormPage = () => {
                     
 
                     <button type="submit">Submit</button>
+                    <button onClick={() => handleDelete()}>Delete this Event</button>
                 </form>
 
-                <form onSubmit={handleDelete}>
-                    <button type="submit">Delete this Event</button>
-                </form>
             </div>
     )
 }

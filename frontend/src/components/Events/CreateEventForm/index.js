@@ -41,7 +41,7 @@ const CreateEventForm = () => {
     }
 
     return (
-        <div className="form-container">
+        <div className="edit-form-container">
             <form onSubmit={handleSubmit}>
 
                 <label htmlFor="name">Event Name</label>
@@ -73,7 +73,7 @@ const CreateEventForm = () => {
                     value={date}
                     onChange={(e) => setDate(e.target.value)}    
                 />
-
+                <label htmlFor="date">Location</label>
                 <select 
                     value={locationId}
                     onChange={(e) => setLocationId(e.target.value)}

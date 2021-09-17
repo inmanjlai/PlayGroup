@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      image:{
+        type: Sequelize.TEXT,
+        allowNull: true,
+        defaultValue: "https://i.stack.imgur.com/l60Hf.png"
+      },
       username: {
         type: Sequelize.STRING(30),
         allowNull: false,

@@ -34,7 +34,7 @@ const CreateGroupPage = () => {
     }
 
     return (
-        <div>
+        <div className="edit-form-container">
             <form onSubmit={handleCreate}>
                 <label htmlFor="name">Group Name</label>
                 <input 

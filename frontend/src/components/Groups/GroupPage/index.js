@@ -5,6 +5,7 @@ import { getAllGroups, joinOneGroup, leaveOneGroup } from "../../../store/groups
 import { getUsers } from "../../../store/session";
 import { NavLink } from "react-router-dom";
 import "./../../Events/EventPage/EventPage.css"
+import "../Groups.css"
 
 const GroupPage = () => {
 
@@ -58,16 +59,28 @@ const GroupPage = () => {
                     {user && (user?.id !== currentGroup?.ownerId ? (!alreadyMember(currentGroup) ? ( <button className="group-button" onClick={(e) => dispatch(joinOneGroup({groupId: currentGroup.id, userId: user.id}))}>Join Group</button> ) : ( <button className='group-button-leave' onClick={(e) => dispatch(leaveOneGroup({groupId: currentGroup.id, userId: user.id}))}>Leave Group</button> )) : false)}
                 </div>
             </div>
-            <div className="group-details">
-                <div className="attendees">
-                    <h3>What we're about</h3>
-                    <p> {currentGroup?.description}</p>
-                    <p> <span>Format:</span> {currentGroup?.Game?.name}</p>
-                    <p> <span>Format Details:</span> {currentGroup?.Game?.format}</p>
-                    <p> <span>Players per Pod:</span> {currentGroup?.Game?.playerlimit}</p>
-                    <h3>Attendees ({currentGroup?.Users?.length})</h3>
-                    <div>
-                      {/* add attendees here */}
+            <div className="secondary-container">
+                <div className="group-details">
+                    <div className="members">
+                        <div className="left">
+                            <h3>What we're about</h3>
+                            <p> {currentGroup?.description}</p>
+                        </div>
+                        <div className="right">
+                            <h3 className="">Members ({currentGroup?.Users?.length})</h3>
+                            <div className="group-member-list">
+                            {currentGroup?.Users?.map((user) => {
+                                return (
+                                    <div className="user-card">
+                                        <div className="user-image">
+                                            <img src={user.image} alt="img" />
+                                        </div>
+                                        <h4>{user.username}</h4>
+                                    </div>
+                                )
+                            })}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

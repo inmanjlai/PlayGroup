@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { deleteOneGroup, editOneGroup } from "../../../store/groups";
+import { deleteOneGroup, editOneGroup, getAllGroups } from "../../../store/groups";
 
 const EditGroupPage = () => {
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [ownerId, setOwnerId] = useState(1);
-    const [image, setImage] = useState("");
-
+    
     const user = useSelector((state) => state.session.user)
+    const groups = useSelector((state) => state.groups.groups);
+    
     const params = useParams()
-
-    const { groupId } = params;
-
-    const history = useHistory();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        setOwnerId(user.id)
-    },[user.id])
+    const history = useHistory();
+    
+        useEffect(() => {
+            dispatch(getAllGroups())
+        },[dispatch])
+    
+        useEffect(() => {
+            setOwnerId(user.id)
+        },[user.id])
+    
+    const { groupId } = params;
+    const currentGroup = groups?.find((group) => group.id === +groupId)
+    console.log(currentGroup, groupId, "<------------ currentGroup")
+    
+    const [name, setName] = useState(currentGroup?.name);
+    const [description, setDescription] = useState(currentGroup?.description);
+    const [ownerId, setOwnerId] = useState(currentGroup?.ownerId);
+    const [image, setImage] = useState(currentGroup?.image);
 
     const handleEdit = (e) => {
         e.preventDefault();
@@ -38,14 +46,13 @@ const EditGroupPage = () => {
 
     const handleDelete = (e) => {
         e.preventDefault();
-
         
         dispatch(deleteOneGroup(groupId))
         history.push('/groups')
     }
 
     return (
-        <div>
+        <div className="edit-form-container">
             <form onSubmit={handleEdit}>
                 <label htmlFor="name">Group Name</label>
                 <input 
