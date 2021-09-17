@@ -15,6 +15,7 @@ import CreateGroupPage from "./components/Groups/createGroupPage";
 import EditGroupPage from "./components/Groups/EditGroupPage";
 import EventPage from "./components/Events/EventPage";
 import GroupPage from "./components/Groups/GroupPage";
+import Results from "./components/Results";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route exact path="/groups/:groupId/edit">
             <EditGroupPage />
+          </Route>
+          <Route exact path="/results/:searchQuery">
+            <Results />
           </Route>
         </Switch>
       )}

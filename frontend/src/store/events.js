@@ -113,6 +113,21 @@ export const deleteOneRSVP = ({userId, eventId}) => async(dispatch) => {
     return false;
 }
 
+export const searchEvents = (title) => async(dispatch) => {
+    console.log(title)
+    const response = await csrfFetch('http://localhost:3000/api/events/search',
+    {
+        method: "POST",
+        body: JSON.stringify({title})
+    })
+    if(response.ok) {
+        const searchedEvents = await response.json();
+        dispatch(getEvents(searchedEvents));
+        return searchedEvents;
+    }
+    return false;
+}
+
 const eventReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {

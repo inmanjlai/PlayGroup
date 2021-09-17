@@ -1,19 +1,24 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { NavLink } from 'react-router-dom'
-import './Events.css'
-import { createOneRSVP, deleteOneRSVP } from "../../store/events"
-import { getAllEvents } from "../../store/events"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { searchEvents } from "../../store/events";
+import { NavLink } from "react-router-dom";
+import { createOneRSVP, deleteOneRSVP } from "../../store/events";
 
-const Events = () => {
-    const dispatch = useDispatch()
-    
-    const user = useSelector((state) => state.session.user)
+const Results = () => {
+
     const events = useSelector((state) => state.events.events)
-    
+    const user = useSelector((state) => state.session.user)
+
+    const params = useParams()
+    const dispatch = useDispatch()
+
+    const { searchQuery } = params;
+    console.log(searchQuery)
+
     useEffect(() => {
-        dispatch(getAllEvents())
-    },[dispatch])
+        dispatch(searchEvents(searchQuery))
+    }, [])
 
     let alreadyMember = (event) => {
         for(let groupMember in event.RSVPs){
@@ -25,19 +30,14 @@ const Events = () => {
         return false
     }
 
-        return (
-            <div className="event-body">
-                <div className="nav-links">
-                    <div>
-                        <h2><NavLink to="/events">Events</NavLink></h2>
-                        <h2><NavLink to="/Groups">Groups</NavLink></h2>
-                    </div>
-                    {user && (<NavLink to="/events/new" className="new-event">
-                        <button className="new-event-button">Host an event</button>
-                    </NavLink>)}
-                </div>
-                {events && (<div className="card-container">
-                    {events?.map((event) => (
+    return (
+        <div className="event-body">
+            <div style={{margin: "1rem"}}>
+                <h1>Search Results</h1>
+            </div>
+            <div>
+                {events?.map((event) => {
+                    return(
                         <div className="event-card" key={event.id}>
 
                             <div className="image">
@@ -64,10 +64,11 @@ const Events = () => {
                                 {user && event?.User?.id === user.id ? <button className="edit-button"><NavLink to={`/events/${event.id}/edit`}>Edit</NavLink></button> : false}
                             </div>
                         </div>
-                    ) )}
-                </div>)}
+                    )
+                })}
             </div>
-        )
+        </div>
+    )
 }
 
-export default Events
+export default Results;

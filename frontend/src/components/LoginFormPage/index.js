@@ -51,7 +51,8 @@ function LoginFormPage() {
           />
 
         
-        <button type="submit">Log In</button>
+        <button className="teal" type="submit">Log In</button>
+        <button className="yellow" onClick={() => {setCredential("Demo-lition"); setPassword("password")}}>Demo Log In</button>
         
       </form>
 

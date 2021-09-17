@@ -94,3 +94,10 @@ textarea {
     overflow-y: scroll;
 }
 
+.teal {
+    background-color: teal;
+}
+
+.yellow {
+    background-color: goldenrod;
+}

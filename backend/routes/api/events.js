@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { Op } = require('sequelize')
+
 
 router.get('/', asyncHandler(async(req, res) => {
     const events = await Event.findAll({include: {all: true}});
@@ -57,6 +59,21 @@ router.delete('/', requireAuth, asyncHandler(async(req, res) => {
     await event.destroy()
 
     return res.json({id: event.id, message: "event deleted successfully"});
+}))
+
+router.post('/search', asyncHandler(async(req, res) => {
+    console.log("we got here", "<----------------------------------")
+    const { title } = req.body;
+
+    console.log(title, "<-------------------------------")
+
+    const events = await Event.findAll({where: {
+        name: { [Op.iLike]: `%${title}%` }
+    }, include: {all: true}})
+
+    console.log(events, "<-------------------------------")
+
+    res.json(events)
 }))
 
 
