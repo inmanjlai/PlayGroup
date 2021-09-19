@@ -17,6 +17,8 @@ const EventPage = () => {
     const events = useSelector((state) => state.events.events);
     const allUsers = useSelector((state) => state.session.allUsers)
 
+    const rsvpMembers = [];
+
     const params = useParams();
 
     const { eventId } = params;
