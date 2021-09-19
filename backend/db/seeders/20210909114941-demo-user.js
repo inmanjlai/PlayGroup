@@ -8,16 +8,61 @@ module.exports = {
       {
         email: 'demo@user.io',
         username: 'Demo-lition',
+        image: faker.image.avatar(),
         hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
-        username: 'FakeUser1',
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
       },
       {
         email: faker.internet.email(),
-        username: 'FakeUser2',
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.name.firstName(),
+        image: faker.image.avatar(),
         hashedPassword: bcrypt.hashSync(faker.internet.password()),
       },
     ], {});

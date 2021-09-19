@@ -2,13 +2,32 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
       return queryInterface.bulkInsert('userGroups', [
-        {userId: 1, groupId: 1},
-        {userId: 2, groupId: 2},
-        {userId: 3, groupId: 3},
-        {userId: 1, groupId: 3},
-        {userId: 2, groupId: 3},
-        {userId: 1, groupId: 2},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
+        {userId: getRandomInt(1, 11), groupId: getRandomInt(1, 4)},
       ], {});
   },
 

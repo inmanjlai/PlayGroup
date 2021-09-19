@@ -2,14 +2,36 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('RSVPs', [
-        {userId: 1, eventId: 3},
-        {userId: 1, eventId: 4},
-        {userId: 2, eventId: 1},
-        {userId: 2, eventId: 3},
-        {userId: 3, eventId: 1},
-        {userId: 3, eventId: 2},
 
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
+      return queryInterface.bulkInsert('RSVPs', [
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
+        {userId: getRandomInt(1, 11), eventId: getRandomInt(1, 6)},
       ], {});
   
   },

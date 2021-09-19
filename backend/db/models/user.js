@@ -65,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     User.belongsToMany(models.Group, columnMapping)
+    User.hasMany(models.Comment, { foreignKey: "userId" })
   };
 
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
