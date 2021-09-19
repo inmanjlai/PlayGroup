@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Comment } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -47,6 +47,22 @@ router.post(
     });
   }),
 );
+
+router.post("/create-comment", asyncHandler(async(req, res) => {
+
+  const { comment } = req.body;
+  console.log(comment);
+  const {body, userId, groupId} = comment;
+
+  await Comment.create({
+    body, userId, groupId
+  })
+
+  const users = await User.findAll({include: {all: true}})
+  res.json(users)
+}))
+
+
   
 
 module.exports = router;
