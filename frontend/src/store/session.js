@@ -73,6 +73,16 @@ export const getUsers = () => async(dispatch) => {
     }
 }
 
+export const createComment = (comment) => async(dispatch) => {
+    const response = await csrfFetch("/api/users/create-comment", {
+        method: "POST",
+        body: JSON.stringify({comment})
+    })
+
+    const users = await response.json();
+    dispatch(getAllUsers(users))
+}
+
 const loginUserReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {

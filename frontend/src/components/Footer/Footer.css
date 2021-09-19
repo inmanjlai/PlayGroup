@@ -21,6 +21,7 @@ footer {
     height: 100%;
     max-width: 1200px;
     flex: 1;
+    padding: 1rem;
 }
 
 .get-started {
@@ -29,7 +30,7 @@ footer {
     display: flex;
     gap: 1rem;
     align-items: center;
-    /* padding-bottom: 1rem; */
+    padding-bottom: 1rem;
     border-bottom: 1px solid rgba(117, 117, 117, 1);
 }
 

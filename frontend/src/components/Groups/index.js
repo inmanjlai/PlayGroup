@@ -52,8 +52,9 @@ const Groups = () => {
                             <p>Members: {group?.Users?.length}</p>
                         </div>
                         <div className="description">
-                            <p>{group.description}</p>
+                            <p>{group.description.slice(0, 185)}...</p>
                         </div>
+                        
                         <div className="user-controls">
                             {user?.id === group?.ownerId ? <button className="edit-button"><NavLink to={`/groups/${group.id}/edit`}>Edit Group</NavLink></button>  : false}
 
