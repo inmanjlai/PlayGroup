@@ -61,7 +61,7 @@ router.delete('/', requireAuth, asyncHandler(async(req, res) => {
     return res.json({id: event.id, message: "event deleted successfully"});
 }))
 
-router.post('/search', asyncHandler(async(req, res) => {
+router.post('/search', requireAuth, asyncHandler(async(req, res) => {
     console.log("we got here", "<----------------------------------")
     const { title } = req.body;
 
