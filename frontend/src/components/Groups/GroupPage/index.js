@@ -34,7 +34,7 @@ const GroupPage = () => {
     const user = useSelector((state) => state.session.user)
     const [body, setBody] = useState("")
 
-    const me = allUsers.find((uuser) => +uuser.id === +user.id);
+    const me = allUsers?.find((uuser) => +uuser?.id === +user?.id);
 
     const params = useParams();
 
@@ -45,7 +45,7 @@ const GroupPage = () => {
     Members?.forEach((member) => console.log(member.groupId))
 
     const userComments = []
-    allUsers.forEach((user) => user.Comments.map((comment) => +comment.groupId === +groupId ? userComments.push({body: comment.body, username: user.username, image: user.image}) : false))
+    allUsers?.forEach((user) => user?.Comments?.map((comment) => +comment?.groupId === +groupId ? userComments?.push({body: comment?.body, username: user?.username, image: user?.image}) : false))
 
 
     const handleCreateComment = (e) => {
@@ -73,7 +73,7 @@ const GroupPage = () => {
                         <h2 className="group-members">{currentGroup?.Users?.length} {currentGroup?.Users?.length === 1 ? "member" : "members"}</h2>
                         <h2>Organized by <span className="group-host">{currentGroup?.Users?.map((uuser) => uuser.id === currentGroup?.ownerId ? <span key={uuser.id}>{uuser.username}</span> : false)}</span></h2>
 
-                        {user?.id === currentGroup?.ownerId ? <button className="edit-button"><NavLink to={`/groups/${currentGroup.id}/edit`}>Edit Group</NavLink></button>  : false}
+                        {user?.id === currentGroup?.ownerId ? <button className="edit-button"><NavLink to={`/groups/${currentGroup?.id}/edit`}>Edit Group</NavLink></button>  : false}
 
                         {user && (user?.id !== currentGroup?.ownerId ? (!alreadyMember(currentGroup) ? ( <button className="group-button" onClick={(e) => dispatch(joinOneGroup({groupId: currentGroup.id, userId: user.id}))}>Join Group</button> ) : ( <button className='group-button-leave' onClick={(e) => dispatch(leaveOneGroup({groupId: currentGroup.id, userId: user.id}))}>Leave Group</button> )) : false)}
                     </div>
@@ -84,7 +84,7 @@ const GroupPage = () => {
                     </div>  
                     <div className="comments">
 
-                        <div className="create-a-comment">
+                        {user && (<div className="create-a-comment">
                             <form className="comment-form" onSubmit={handleCreateComment}>
                                 <textarea placeholder="Join the discussion or simply ask a question!" value={body} onChange={(e) => setBody(e.target.value)}></textarea>
                                 <div className='me-card'>
@@ -97,7 +97,7 @@ const GroupPage = () => {
                                     <button>Submit</button>
                                 </div>
                             </form>
-                        </div>
+                        </div>)}
 
                         {userComments.map((comment) => {
                             return (
